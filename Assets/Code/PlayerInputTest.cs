@@ -20,6 +20,9 @@ namespace PeliprojektiExamples
 		// A member variable which is used to store the information about move input
 		private Vector2 moveInput;
 
+		// isJumping == true when the user keeps pressing the jump button
+		private bool isJumping;
+
 		// Update is called once per frame
 		private void Update()
 		{
@@ -39,6 +42,12 @@ namespace PeliprojektiExamples
 			// Vector3 position = transform.position;
 			// position += (Vector3)movement;
 			// transform.position = position;
+
+
+			if (isJumping)
+			{
+				Debug.Log("Jumping");
+			}
 		}
 
 		// Reads the input using the old input manager.
@@ -67,6 +76,8 @@ namespace PeliprojektiExamples
 		{
 			InputActionPhase inputPhase = callbackContext.phase;
 			Debug.Log("Jump input phase: " + inputPhase);
+
+			isJumping = inputPhase == InputActionPhase.Performed;
 		}
 	}
 }
