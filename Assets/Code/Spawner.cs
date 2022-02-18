@@ -90,6 +90,15 @@ namespace PeliprojektiExamples
 			{
 				timerOffset = spawnTime;
 			}
+			else if (timerOffset < 0)
+			{
+				timerOffset = 0;
+			}
+
+			if (spawnTime < 0)
+			{
+				spawnTime = 0;
+			}
 		}
 
 		private void Spawn()
