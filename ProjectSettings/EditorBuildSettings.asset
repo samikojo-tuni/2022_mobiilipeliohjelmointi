@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TilemapExample.unity
     guid: 5df43d194a386a34493fe24c6692cccb
+  - enabled: 1
+    path: Assets/Scenes/PlayerInput.unity
+    guid: 7f00bf639a00f8143a4c1a5364a9ee09
   m_configObjects: {}
