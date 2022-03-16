@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 5174688291574960619}
   - component: {fileID: 5174688291574960612}
   - component: {fileID: 5174688291574960613}
+  - component: {fileID: 2293207289591098406}
+  - component: {fileID: 1546947775572999876}
   m_Layer: 0
   m_Name: Gem
   m_TagString: Untagged
@@ -102,3 +104,37 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!58 &2293207289591098406
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5174688291574960614}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.21875
+--- !u!114 &1546947775572999876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5174688291574960614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f720b2c3eea7ad84d9605cc33c90262c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item:
+    Name: Gem
+    Weight: 5
+    Type: 2
+    CanStack: 1
+    Count: 1

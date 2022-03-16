@@ -3,20 +3,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using InventorySystem;
+using InventorySystem.Visual;
+using InventorySystem.UI;
 
 namespace PeliprojektiExamples
 {
 	[RequireComponent(typeof(InputProcessor))]
 	public class CharacterControl : MonoBehaviour
 	{
+		#region Statics
+		// Staattista fieldiä ei tuhota scenen unloadin myötä (koska se ei ole olion omaisuutta, vaan luokan)
+		private static Inventory Inventory;
+		#endregion
+
 		public enum ControlState
 		{
 			GamePad,
 			Touch
 		}
 
+		#region Fields
 		[SerializeField]
 		private float velocity = 1;
+
+		// Oletusarvoa käytetään, jos Unity ei ylikirjoita sitä (arvoa ei ole tallennettu esim. sceneen).
+		[SerializeField]
+		private float inventoryWeightLimit = 30;
 
 		private Animator animator;
 
@@ -31,6 +44,8 @@ namespace PeliprojektiExamples
 		private Vector2 targetPosition;
 
 		private ControlState controlState = ControlState.GamePad;
+		private InventoryUI inventoryUI;
+		#endregion
 
 		private void Awake()
 		{
@@ -54,6 +69,19 @@ namespace PeliprojektiExamples
 				Debug.LogError("Character is missing an Rigidbody2D component!");
 				Debug.Break();
 			}
+
+			if (Inventory == null)
+			{
+				// Luodaan uusi inventorio vain siinä tapauksessa, että sitä ei aiemmin ollut olemassa
+				Inventory = new Inventory(inventoryWeightLimit);
+			}
+
+			inventoryUI = FindObjectOfType<InventoryUI>();
+		}
+
+		private void Start()
+		{
+			inventoryUI.SetInventory(Inventory);
 		}
 
 		private void Update()
@@ -64,6 +92,25 @@ namespace PeliprojektiExamples
 		private void FixedUpdate()
 		{
 			MoveCharacter();
+		}
+
+		private void OnTriggerEnter2D(Collider2D other)
+		{
+			ItemVisual itemVisual = other.GetComponent<ItemVisual>();
+			if (itemVisual != null && Inventory.AddItem(itemVisual.Item))
+			{
+				Debug.Log("Item added to the inventory!");
+				if (inventoryUI != null)
+				{
+					inventoryUI.UpdateInventory();
+				}
+
+				Destroy(other.gameObject);
+			}
+			else
+			{
+				Debug.Log("Inventory weigh limit met!");
+			}
 		}
 
 		private void UpdateAnimator()
