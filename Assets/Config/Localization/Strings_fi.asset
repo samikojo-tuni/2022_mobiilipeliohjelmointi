@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Strings_fi
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: fi
+  m_SharedData: {fileID: 11400000, guid: 493448477b4e80e499dfeb7f0f3b3a79, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 95247253504
+    m_Localized: Paino
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6126530576384
+    m_Localized: Asetukset
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7996183527424
+    m_Localized: Kieli
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8812122456064
+    m_Localized: Suomi
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8911024144384
+    m_Localized: English
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21012769783808
+    m_Localized: Sulje
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28756398686208
+    m_Localized: "\xC4\xE4ni"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31500920537088
+    m_Localized: Musiikki
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31555240968192
+    m_Localized: Efektit
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 1

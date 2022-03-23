@@ -12,10 +12,12 @@ namespace PeliprojektiExamples
 		{
 			None,
 			Started,
-			InProgress
+			InProgress,
+			Options
 		}
 
 		public const string LoaderName = "Loader";
+		public const string OptionsName = "Options";
 
 		public static LevelLoader Current
 		{
@@ -31,6 +33,7 @@ namespace PeliprojektiExamples
 		private string nextSceneName;
 		// Viittaus loading-sceneen
 		private Scene loadingScene;
+		private Scene optionsScene;
 
 		// Nk. Singleton, eli tästä oliosta voi olla vain yksi kopio olemassa kerralla
 		private void Awake()
@@ -59,6 +62,21 @@ namespace PeliprojektiExamples
 		{
 			// Lopetetaan eventin kuuntelu
 			SceneManager.sceneLoaded -= OnLevelLoaded;
+		}
+
+		public void LoadOptions()
+		{
+			// Pysäytä peli
+			Time.timeScale = 0;
+			state = LoadingState.Options;
+			SceneManager.LoadSceneAsync(OptionsName, LoadSceneMode.Additive);
+		}
+
+		public void CloseOptions()
+		{
+			state = LoadingState.None;
+			SceneManager.UnloadSceneAsync(optionsScene);
+			Time.timeScale = 1; // Palauta pelin normaalinopeus
 		}
 
 		public void LoadLevel(string sceneName)
@@ -105,6 +123,9 @@ namespace PeliprojektiExamples
 							break; // Poistuu loopista
 						}
 					}
+					break;
+				case LoadingState.Options:
+					optionsScene = scene;
 					break;
 			}
 		}

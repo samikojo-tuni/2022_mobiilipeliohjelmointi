@@ -97,6 +97,11 @@ namespace PeliprojektiExamples
 		private void OnTriggerEnter2D(Collider2D other)
 		{
 			ItemVisual itemVisual = other.GetComponent<ItemVisual>();
+			Collect(itemVisual);
+		}
+
+		private bool Collect(ItemVisual itemVisual)
+		{
 			if (itemVisual != null && Inventory.AddItem(itemVisual.Item))
 			{
 				Debug.Log("Item added to the inventory!");
@@ -105,12 +110,21 @@ namespace PeliprojektiExamples
 					inventoryUI.UpdateInventory();
 				}
 
-				Destroy(other.gameObject);
+				float delay = 0;
+				AudioSource audio = itemVisual.GetComponent<AudioSource>();
+				if (audio != null)
+				{
+					audio.Play();
+					delay = audio.clip.length;
+				}
+
+				// Delay the destruction until the audio is played
+				Destroy(itemVisual.gameObject, delay);
+				return true;
 			}
-			else
-			{
-				Debug.Log("Inventory weigh limit met!");
-			}
+
+			Debug.Log("Inventory weigh limit met!");
+			return false;
 		}
 
 		private void UpdateAnimator()

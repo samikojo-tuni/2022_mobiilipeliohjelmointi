@@ -4,6 +4,8 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 
 namespace InventorySystem.UI
 {
@@ -28,6 +30,8 @@ namespace InventorySystem.UI
 		[SerializeField]
 		private ItemImage[] itemImages;
 
+		[SerializeField] private LocalizedString localizedWeight;
+
 		private InventoryUIItem[] items;
 		private Inventory inventory;
 
@@ -42,6 +46,24 @@ namespace InventorySystem.UI
 
 			// Deaktivoidaan template object. Sille ei ole enää tarvetta
 			template.gameObject.SetActive(false);
+		}
+
+		private void OnEnable()
+		{
+			// Aloittaa eventin kuuntelun. Eventin lauetessa suoritetaan OnLocalizationChanged.
+			LocalizationSettings.SelectedLocaleChanged += OnLocalizationChanged;
+		}
+
+		private void OnDisable()
+		{
+			// Lopettaa eventin kuuntelun.
+			LocalizationSettings.SelectedLocaleChanged -= OnLocalizationChanged;
+		}
+
+		private void OnLocalizationChanged(Locale locale)
+		{
+			// Kun lokalisaatio muuttuu, päivitetään komponentin tekstit
+			SetWeight();
 		}
 
 		public void SetInventory(Inventory inventory)
@@ -81,7 +103,7 @@ namespace InventorySystem.UI
 
 		private void SetWeight()
 		{
-			weightText.text = $"Weight: {inventory.Weight}";
+			weightText.text = $"{localizedWeight.GetLocalizedString()}: {inventory.Weight}";
 		}
 
 		private InventoryUIItem GetItem(ItemType type)
