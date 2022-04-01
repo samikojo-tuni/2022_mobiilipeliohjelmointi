@@ -66,6 +66,17 @@ namespace InventorySystem.UI
 			SetWeight();
 		}
 
+		public void Save()
+		{
+			inventory.Save();
+		}
+
+		[ContextMenu("Clear save data")]
+		public void ClearSave()
+		{
+			PlayerPrefs.DeleteAll();
+		}
+
 		public void SetInventory(Inventory inventory)
 		{
 			this.inventory = inventory;
